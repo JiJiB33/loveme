@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch Me if You Can!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>Do you like this fun challenge?</h1>
+    <div class="button-container">
+        <button class="button" onclick="showPopup()">Yes</button>
+        <button class="button" id="noButton">No</button>
+    </div>
+
+    <!-- Popup Structure -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p>Glad You Love Me! <3</p>
+            <button onclick="redirectToPrank()" class="popup-button">Continue</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
