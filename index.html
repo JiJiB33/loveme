@@ -1,42 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-    <script src="https://kit.fontawesome.com/1b18b23329.js" crossorigin="anonymous"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Do You Love Me?</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/1b18b23329.js" crossorigin="anonymous"></script>
+    <!-- Load Vue.js and jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
+<style>
+@import "https://fonts.googleapis.com/css?family=Raleway";
+
+body {
+   overflow: hidden;
+}
+
+.preloader {
+   width: 100%;
+   height: 100vh;
+   background: #3498db;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   color: white;
+   font-family: "Raleway", sans-serif;
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 10;
+   transition: transform 0.8s ease;
+}
+.preloader.hidden {
+   transform: translateY(-100%);
+}
+.preloader__status {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+.preloader__status-text {
+   font-size: 40px;
+   font-family: "Raleway", sans-serif;
+   margin-bottom: 20px;
+}
+.preloader__status-loader {
+   width: 100%;
+   height: 3px;
+}
+.preloader__status-bar {
+   background: white;
+   height: 100%;
+}
+
+.frontpage {
+   width: 100%;
+   height: 100vh;
+   background: #2c4762;
+   position: fixed;
+   top: 0;
+   left: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   opacity: 0;
+   transition: opacity 1s ease;
+   z-index: 1;
+}
+.frontpage.visible {
+   opacity: 1;
+}
+.frontpage__title {
+   color: white;
+   font-family: "Raleway", sans-serif;
+   font-size: 2em;
+}
+</style>
+
 <body>
-
-    <div class="tenor-gif-embed" data-postid="20161779" data-share-method="host" data-aspect-ratio="0.95625" data-width="30%">
-        <a href="https://tenor.com/view/shy-cute-gif-20161779">Shy Cute Sticker</a>from <a href="https://tenor.com/search/shy-stickers">Shy Stickers</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-    <br>
-    <h1 style="font-size: 60px;">Do You Love Ji Ji?</h1>
-    <div class="button-container">
-        <button class="button" onclick="showPopup()">Yes
-            <i class="fa-solid fa-heart fa-beat" style="color: #b50000;"></i>
-        </button>
-        <button class="button" id="noButton">No
-            <i class="fa-solid fa-heart-crack fa-shake" style="color: #b50000;"></i>
-        </button>
+<div id="app" class="preloader">
+    <div class="preloader__status">
+       <div data-status class="preloader__status-text">I'm {{ loaded }}% done!</div>
+       <div class="preloader__status-loader">
+          <div data-loader :style="loadStyle" class="preloader__status-bar"></div>
+       </div>
     </div>
+</div>
+<div class="frontpage">
+    <h1 class="frontpage__title">Nice to meet you, I'm Ji Ji!</h1>
+</div>
 
-    <!-- Popup Structure -->
-    <div id="popup" class="popup">
-        <div class="popup-content">
-            <p>Yayy! Glad You Love Me!</p>
-            <center><div class="tenor-gif-embed" data-postid="6631158398493543278" data-share-method="host" data-aspect-ratio="1.37569" data-width="100%">
-                <a href="https://tenor.com/view/goma-happy-love-gif-6631158398493543278">Goma Happy GIF</a>from <a href="https://tenor.com/search/goma-gifs">Goma GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-            </center>
-
-            <p>Ji Ji Loves You So Much <3</p>
-            
-            
-                <button onclick="redirectToPrank()" class="popup-button">Continue</button>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data: {
+            loaded: 0,
+            loading: null,
+            loadStyle: {
+                width: "0%"
+            },
+            statusElem: null,
+            loader: null,
+            body: $("body")
+        },
+        mounted() {
+            this.statusElem = $("[data-status]");
+            this.loader = $("[data-loader]");
+            this.startLoading();
+        },
+        watch: {
+            loaded() {
+                this.loadStyle.width = `${this.loaded}%`;
+            }
+        },
+        methods: {
+            startLoading() {
+                this.loading = setInterval(this.load, 40);
+            },
+            load() {
+                if (this.loaded < 100) {
+                    this.loaded++;
+                } else {
+                    this.doneLoading();
+                }
+            },
+            doneLoading() {
+                clearInterval(this.loading);
+                this.updateStatus();
+            },
+            updateStatus() {
+                this.statusElem.text("Let's get crazy!");
+                this.loader.fadeOut();
+                this.animatePreloader();
+            },
+            animatePreloader() {
+                $(this.$el).delay(500).queue(() => {
+                    $(this.$el).addClass("hidden");
+                    $(".frontpage").addClass("visible");
+                    $("body").css("overflow", "auto"); 
+                });
+            }
+        }
+    });
+</script>
 </body>
 </html>

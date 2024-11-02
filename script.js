@@ -1,7 +1,6 @@
 const noButton = document.getElementById('noButton');
 const popup = document.getElementById('popup');
 
-// Move "No" button when cursor approaches
 noButton.addEventListener('mouseover', () => {
     const x = Math.floor(Math.random() * (window.innerWidth - noButton.clientWidth));
     const y = Math.floor(Math.random() * (window.innerHeight - noButton.clientHeight));

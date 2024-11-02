@@ -114,6 +114,8 @@ body.hacked {
     font-size: 1.2em;
 }
 
+
+
 /* Keyframes for blinking text */
 @keyframes blink {
     0%, 100% { opacity: 1; }
