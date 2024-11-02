@@ -1,3 +1,4 @@
+@import "https://fonts.googleapis.com/css?family=Raleway";
 /* Main styles */
 body {
     display: flex;
@@ -6,15 +7,16 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Raleway", sans-serif;
     background-color: #ffffff;
 }
 
 h1 {
     margin-bottom: 20px;
-    color: #333;
-    font-size: 2em; /* Scalable font size */
+    color: #000000;
     text-align: center;
+    font-weight: 900 !important;
+    font-size: 45px;
 }
 
 /* Button styling */
@@ -37,7 +39,7 @@ h1 {
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #5ba5c7;
 }
 
 /* Popup styling */
@@ -73,16 +75,17 @@ h1 {
 
 .popup-button {
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
+    font-family: "Raleway", sans-serif;
     color: #fff;
-    background-color: #007bff;
+    background-color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .popup-button:hover {
-    background-color: #0056b3;
+    background-color: #5ba5c7;
 }
 
 /* Hacked page styling */

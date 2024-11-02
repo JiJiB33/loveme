@@ -6,7 +6,6 @@
     <title>Do You Love Me?</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/1b18b23329.js" crossorigin="anonymous"></script>
-    <!-- Load Vue.js and jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -80,6 +79,31 @@ body {
    font-family: "Raleway", sans-serif;
    font-size: 2em;
 }
+
+/* Sliding overlay styles */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #3498db;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Raleway", sans-serif;
+    color: white;
+    font-size: 40px;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: transform 3s ease, opacity 0.5s ease 2.5s;
+}
+
+.transition-overlay.active {
+    opacity: 1;
+    transform: translateX(0%);
+}
 </style>
 
 <body>
@@ -91,8 +115,14 @@ body {
        </div>
     </div>
 </div>
+
 <div class="frontpage">
     <h1 class="frontpage__title">Nice to meet you, I'm Ji Ji!</h1>
+</div>
+
+<!-- Sliding overlay -->
+<div class="transition-overlay" id="transitionOverlay">
+    Welcome to the next page!
 </div>
 
 <script>
@@ -142,8 +172,19 @@ body {
                 $(this.$el).delay(500).queue(() => {
                     $(this.$el).addClass("hidden");
                     $(".frontpage").addClass("visible");
-                    $("body").css("overflow", "auto"); 
+                    $("body").css("overflow", "auto");
+
+                    setTimeout(this.triggerTransition, 3000); // Adjusted to 5000 milliseconds (5 seconds)
                 });
+            },
+            triggerTransition() {
+                const overlay = document.getElementById("transitionOverlay");
+                overlay.classList.add("active");
+
+                // Redirect to home.html after the transition finishes
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 5000); // Match the transition duration
             }
         }
     });
