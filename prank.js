@@ -18,5 +18,5 @@ setInterval(() => {
 
 setTimeout(() => {
     alert("Just kidding! This was a harmless prank. :)");
-    window.location.href = "index.html"; // Redirect back to the main page
-}, 25000); // Prank ends after 25 seconds
+    window.location.href = "showcase.html"; // Redirect back to the main page
+}, 5000); // Prank ends after 25 seconds
